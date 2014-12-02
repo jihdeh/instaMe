@@ -6,7 +6,8 @@ $('form').submit(function(evt){
 	var $submit = $('#submit');
 	var name = $search.val();
  var instaOptions = {
- 	tags: name
+ 	tags: name,
+ 	format: "jsonp"
  };
 $.ajax(url, instaOptions, {
 	type: "GET",
