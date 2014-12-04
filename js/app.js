@@ -6,20 +6,19 @@ var instagram = {
   },
 
   display: function(photos){
+    var photo = "";
     $.each(photos.data, function(index, photos){
-      if(index === 6){
+      if(index === 12){
         return false;
       }
-      photos = "<li>" +
+      photo += "<div class='box'><div class='boxInner'>" +
            "<a href='" + photos.link + "' target='_blank'>" + 
-           "<img class='main' src='" + photos.images.low_resolution.url + "' width='250'  height='250' />" +
+           "<img src='" + photos.images.low_resolution.url + "' width='250'  height='250' />" +
                    "</a>" +
-                   "<img class='avatar' width='40' height='40' src='" + photos.user.profile_picture + "' />" +
-                   "<span class='heart'><strong>" + photos.likes.count + "</strong></span>" +
-                   "</li>";
-              $('#insta_images').append(photos);
-          
-    });
+                   "<div class='titleBox'><span class='heart'><strong>" + photos.likes.count + "Likes</strong></span></div>" +
+                   "</div></div>";
+    });//END EACH
+    $('.wrap').html(photo);
   },
 
   tags: function(tag){
@@ -38,3 +37,18 @@ var instagram = {
   }
 };
 $(document).ready(instagram.initialize);
+$(function(){
+  //initialize instagram photos
+  
+ // See if this is a touch device
+ if ('ontouchstart' in window)
+ {
+    // Set the correct [touchscreen] body class
+    $('body').removeClass('no-touch').addClass('touch');
+   
+    // Add the touch toggle to show text when tapped
+    $('div.boxInner img').click(function(){
+       $(this).closest('.boxInner').toggleClass('touchFocus');
+    });
+   }
+});
